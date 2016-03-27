@@ -15,9 +15,8 @@ function getMessage(a, b) {
     return "Переданное SVG-изображение содержит " + a + " объектов и " + b * 4 + " атрибутов";
     // JPG
   } else if ((typeof a === "object") && (typeof b === "object")) {
-    var twoArraysAmount = 0;
-    a.reduce(function(arg1, arg2, indx) {
-      twoArraysAmount += a[indx] * b[indx];
+    var twoArraysAmount = a.reduce(function(arg1, arg2, indx) {
+    return arg1 + arg2 * b[indx];
     }, 0);
     return "Общая площадь артефактов сжатия: " + twoArraysAmount + " пикселей";
     // PNG
