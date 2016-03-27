@@ -16,9 +16,9 @@ function getMessage(a, b) {
     // JPG
   } else if ((typeof a === "object") && (typeof b === "object")) {
     var twoArraysAmount = 0;
-    a.forEach(function(elem, i, arr) {
-      twoArraysAmount += a[i] * b[i];
-    });
+    a.reduce(function(arg1, arg2, indx) {
+      twoArraysAmount += a[indx] * b[indx];
+    }, 0);
     return "Общая площадь артефактов сжатия: " + twoArraysAmount + " пикселей";
     // PNG
   } else if (typeof a === "object") {
