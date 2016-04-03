@@ -112,6 +112,45 @@
       // Координаты задаются от центра холста.
       this._ctx.drawImage(this._image, displX, displY);
 
+      // вывод оверлея
+      this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+
+      // нижний оверлей
+      this._ctx.fillRect(
+        (-this._resizeConstraint.side),
+        (this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2, // - 0.4
+        this._resizeConstraint.side * 2,
+        this._resizeConstraint.side);
+
+      // правый оверлей
+      this._ctx.fillRect(
+        (this._resizeConstraint.side),
+        (-this._resizeConstraint.side / 2) - this._ctx.lineWidth,
+        -this._resizeConstraint.side / 2 - this._ctx.lineWidth / 2,
+        this._resizeConstraint.side + this._ctx.lineWidth / 2);
+
+      // верхний оверлей
+      this._ctx.fillRect(
+        (this._resizeConstraint.side),
+        (-this._resizeConstraint.side),
+        -this._resizeConstraint.side * 2,
+        this._resizeConstraint.side / 2 - this._ctx.lineWidth); //  + 0.4
+
+      // левый оверлей
+      this._ctx.fillRect(
+        (-this._resizeConstraint.side),
+        (this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
+        this._resizeConstraint.side / 2 - this._ctx.lineWidth,
+        -this._resizeConstraint.side - this._ctx.lineWidth / 2);
+
+      // выводим разрешение картинки
+      this._ctx.fillStyle = '#ffffff';
+      this._ctx.font = 'normal 15pt Arial';
+      this._ctx.fillText(
+        this._image.naturalWidth + ' x ' + this._image.naturalHeight,
+        -45,
+        (-this._resizeConstraint.side / 2) - 10);
+
       // Отрисовка прямоугольника, обозначающего область изображения после
       // кадрирования. Координаты задаются от центра.
       this._ctx.strokeRect(
