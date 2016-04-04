@@ -71,8 +71,25 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
+  var inpLeft = document.querySelector('#resize-x');
+  var inpTop = document.querySelector('#resize-y');
+  var inpSide = document.querySelector('#resize-size');
+  var dispError = document.querySelector('.dimention-error');
+  var btnFwd = document.querySelector('.upload-form-controls-fwd');
+  inpLeft.min = inpTop.min = inpSide.min = 0;
+
   function resizeFormIsValid() {
-    return true;
+    inpLeft.max = currentResizer._image.naturalWidth;
+    inpTop.max = currentResizer._image.naturalHeight;
+    if (
+      ((inpLeft.value + inpSide.value) <= currentResizer._image.naturalWidth) &&
+      ((inpTop.value + inpSide.value) <= currentResizer._image.naturalHeight)
+      ) {
+      return true;
+    } else {
+      return false;
+    }
+
   }
 
   /**
@@ -199,6 +216,22 @@
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
+    }
+  };
+
+  /**
+   * Обработка изменений формы кадрирования. Если форма валидна, продолжаем.
+   * @param {}
+   */
+  resizeForm.onchange = function() {
+    if (resizeFormIsValid()) {
+      dispError.classList.add('invisible');
+      btnFwd.classList.remove('btn-disabled');
+      btnFwd.removeAttribute('disabled');
+    } else {
+      dispError.classList.remove('invisible');
+      btnFwd.classList.add('btn-disabled');
+      btnFwd.setAttribute('disabled', '');
     }
   };
 
